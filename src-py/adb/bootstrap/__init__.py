@@ -1,25 +1,17 @@
-import bin
-import subprocess
+from adb.bootstrap.invoker import run
 
 
 class Bin:
     @staticmethod
     def bootstrap_adb() -> bool:
         print('Bin bootstrap')
-        subprocess.Popen('adb.exe kill-server',
-                         shell=True,
-                         cwd=bin.adb_path).communicate()
 
-        subprocess.Popen('adb.exe start-server',
-                         shell=True,
-                         cwd=bin.adb_path).communicate()
+        run('adb.exe kill-server')
+        run('adb.exe start-server')
 
         print('Bin current connected devices')
-        output, _ = subprocess.Popen('adb.exe devices',
-                                     shell=True,
-                                     cwd=bin.adb_path,
-                                     stdout=subprocess.PIPE,
-                                     stderr=subprocess.PIPE).communicate()
+
+        output, _ = run('adb.exe devices')
 
         print('Bin current connected devices output:')
 

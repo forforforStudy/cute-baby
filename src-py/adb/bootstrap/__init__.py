@@ -1,4 +1,4 @@
-from adb.bootstrap.invoker import run
+from adb.invoker import run
 
 
 class Bin:

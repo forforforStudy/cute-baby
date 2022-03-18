@@ -44,4 +44,4 @@ if __name__ == '__main__':
 
     latest_screencap = adb_ins.screencap_once().latest_screencap()
 
-    print('file_name: {}, abs_file_name: {}', latest_screencap.file_name, latest_screencap.abs_file_name)
+    print('file_name: {}, abs_file_name: {}'.format(latest_screencap.file_name, latest_screencap.abs_file_name))

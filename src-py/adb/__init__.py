@@ -1,8 +1,11 @@
-from typing import List
+from typing import List, Tuple
 
 import bootstrap
-from adb.bootstrap import ADBDevice
+
+from adb.bootstrap import ADBDevice, device
+from adb.command.list_package import list_package
 from adb.command.screencap import screencap, ScreencapResult
+from adb.invoker import run
 
 
 class ADB:
@@ -44,15 +47,23 @@ class ADB:
 
         return self
 
+    def get_package_of_list(self) -> List[Tuple[ADBDevice, List[str]]]:
+        """
+        获取包名列表
+        :return:
+        """
+
+        return [(device, list_package(device)) for device in self.current_devices]
+
     def latest_screencap(self):
         return self.screencaps[0]
-
-    def run_app(self):
-        pass
 
 
 if __name__ == '__main__':
     adb_ins = ADB.ready().use_first_device()
 
-    latest_screencap = adb_ins.screencap_once().latest_screencap()
-    print('file_name: {}, abs_file_name: {}'.format(latest_screencap.file_name, latest_screencap.abs_file_name))
+    for list_result in adb_ins.get_package_of_list():
+        (device, package_list) = list_result
+        print('device_id: {}'.format(device.device_id))
+        for package_name in package_list:
+            print('\t{}'.format(package_name))

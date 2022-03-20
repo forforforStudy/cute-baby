@@ -11,6 +11,9 @@
 # production
 /build
 
+# python tempfile
+/src-py/resources/screencaps
+
 # misc
 .DS_Store
 .env.local

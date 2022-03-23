@@ -6,6 +6,7 @@ from adb.bootstrap import ADBDevice, device
 from adb.command.list_package import list_package
 from adb.command.screencap import screencap, ScreencapResult
 from adb.command.launch_app import launch_app
+from adb.command.tap import tap
 from adb.invoker import run
 
 
@@ -60,6 +61,10 @@ class ADB:
         for current_device in self.current_devices:
             launch_app(app_keyword, current_device)
 
+    def tap(self, x: int, y: int):
+        for current_device in self.current_devices:
+            tap(x, y, current_device)
+
     def latest_screencap(self):
         return self.screencaps[0]
 
@@ -67,4 +72,4 @@ class ADB:
 if __name__ == '__main__':
     adb_ins = ADB.ready().use_first_device()
 
-    adb_ins.launch_app('azurlane')
+    adb_ins.tap(5, 5)

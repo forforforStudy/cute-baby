@@ -1,6 +1,6 @@
 from typing import List, Tuple
 
-import bootstrap
+import adb.bootstrap
 
 from adb.bootstrap import ADBDevice, device
 from adb.command.list_package import list_package

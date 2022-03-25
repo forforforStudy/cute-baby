@@ -6,6 +6,8 @@ from adb.bootstrap import ADBDevice
 
 
 def launch_app(keyword: str, device: ADBDevice = None):
+    print('command.launch_app - 执行运行APP, 关键词: "{}"'.format(keyword))
+
     list_results = list_package(device)
     target_package_name = next(package_name for package_name in list_results if keyword in package_name)
 
@@ -14,8 +16,8 @@ def launch_app(keyword: str, device: ADBDevice = None):
     else:
         target_package_name = target_package_name.replace('package:', '')
 
-        print('launch_app - 查找到关键词: "{}" 包名: "{}"'.format(keyword, target_package_name))
-        print('launch_app - 准备获取包: "{}"的MainActively'.format(target_package_name))
+        print('command.launch_app - 查找到关键词: "{}" 包名: "{}"'.format(keyword, target_package_name))
+        print('command.launch_app - 准备获取包: "{}"的MainActively'.format(target_package_name))
 
         output, _ = run('shell dumpsys package {}'.format(target_package_name))
         for output_line in bytes.decode(output).splitlines():

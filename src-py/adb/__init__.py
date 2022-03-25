@@ -100,4 +100,4 @@ class ADB:
 if __name__ == '__main__':
     adb_ins = ADB.ready().use_first_device()
 
-    adb_ins.swipe(200, 200, 50, 200)
+    adb_ins.screencap_once()

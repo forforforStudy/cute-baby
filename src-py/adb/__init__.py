@@ -7,6 +7,7 @@ from adb.command.list_package import list_package
 from adb.command.screencap import screencap, ScreencapResult
 from adb.command.launch_app import launch_app
 from adb.command.tap import tap
+from adb.command.swipe import swipe
 from adb.invoker import run
 
 
@@ -27,6 +28,10 @@ class ADB:
             raise RuntimeError('没有Device设备链接, ADB无法执行.')
 
     def __init__(self, current_devices: List[ADBDevice]):
+        """
+        初始化构造函数
+        :param current_devices:
+        """
         self.screencaps: List[ScreencapResult] = []
         self.current_devices = current_devices
 
@@ -58,12 +63,35 @@ class ADB:
         return [(current_device, list_package(current_device)) for current_device in self.current_devices]
 
     def launch_app(self, app_keyword: str):
+        """
+        打开APP程序
+        :param app_keyword:
+        :return:
+        """
         for current_device in self.current_devices:
             launch_app(app_keyword, current_device)
 
     def tap(self, x: int, y: int):
+        """
+        模拟手势点击
+        :param x:
+        :param y:
+        :return:
+        """
         for current_device in self.current_devices:
             tap(x, y, current_device)
+
+    def swipe(self, x: int, y: int, to_x: int, to_y: int):
+        """
+        模拟鼠标滑动
+        :param x:
+        :param y:
+        :param to_x:
+        :param to_y:
+        :return:
+        """
+        for current_device in self.current_devices:
+            swipe(x, y, to_x=to_x, to_y=to_y, target_device=current_device)
 
     def latest_screencap(self):
         return self.screencaps[0]
@@ -72,4 +100,4 @@ class ADB:
 if __name__ == '__main__':
     adb_ins = ADB.ready().use_first_device()
 
-    adb_ins.tap(5, 5)
+    adb_ins.swipe(200, 200, 50, 200)

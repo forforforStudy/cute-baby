@@ -3,4 +3,4 @@ from adb.invoker import run
 
 
 def tap(x: int, y: int, target_device: ADBDevice):
-    run('shell input tab {}, {}'.format(x, y), target_device)
+    run('shell input tab {} {}'.format(x, y), target_device)

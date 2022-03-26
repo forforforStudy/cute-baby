@@ -1,3 +1,7 @@
-import flask
+from micro_web.app import app
 
-app = flask.Flask('cute-baby-py-web')
+import micro_web.screencaps_route
+
+
+def bootstrap(port: int = 5555):
+    app.run(host='127.0.0.1', port=port)

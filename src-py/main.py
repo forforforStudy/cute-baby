@@ -1,6 +1,4 @@
-from adb import ADB
+from micro_web import bootstrap
 
 if __name__ == '__main__':
-    adb_ins = ADB.ready().use_first_device()
-
-    adb_ins.screencap_once()
+    bootstrap()

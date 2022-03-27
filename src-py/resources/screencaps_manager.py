@@ -1,7 +1,8 @@
 import os
 import pathlib
 
-from colorama import init, Fore, Back
+from colorama import init, Fore
+from resources.screencap_thread import stop_screencap, start_screencap_thread
 
 init()
 
@@ -36,6 +37,7 @@ class ScreencapsManager:
 
     def __init__(self, pool_size: int):
         self.pool_size = pool_size
+        self.is_screencap_doing = False
 
     def remove_of_oversize(self):
         """
@@ -47,6 +49,17 @@ class ScreencapsManager:
             print(Fore.GREEN + '截屏文件过多超过: {}, 需要删减'.format(self.pool_size))
             for oversize_file in screencap_files[self.pool_size:]:
                 os.remove(oversize_file)
+
+    def start_screen_shot(self):
+        print(Fore.GREEN + '开始定时截屏执行')
+        self.is_screencap_doing = True
+        start_screencap_thread()
+
+    def stop_screen_shot(self):
+        print(Fore.YELLOW + '停止定时截屏执行')
+
+        self.is_screencap_doing = False
+        stop_screencap()
 
 
 screencaps_manager = ScreencapsManager(pool_size=500)

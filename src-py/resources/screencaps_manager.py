@@ -8,21 +8,22 @@ init()
 
 
 class ScreencapsManager:
-    screencaps_dir = os.path.abspath('./screencaps')
+    screencaps_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'screencaps')
 
     @staticmethod
-    def get_screencap_files():
+    def get_screencap_files(with_abs_dir: bool = True):
         """
         获取截屏图片文件列表, 并根据创建时间倒序排序
         :return:
         """
         screencap_abs_files = [
-            os.path.join(ScreencapsManager.screencaps_dir, file_name)
+            os.path.join(ScreencapsManager.screencaps_dir, file_name) if with_abs_dir is True else file_name
             for file_name in filter(lambda file_name: pathlib.Path(file_name).suffix == '.png',
                                     os.listdir(ScreencapsManager.screencaps_dir))
         ]
 
-        screencap_abs_files.sort(key=lambda file_path: -os.path.getctime(file_path))
+        if with_abs_dir is True:
+            screencap_abs_files.sort(key=lambda file_path: -os.path.getctime(file_path))
 
         return screencap_abs_files
 
@@ -63,4 +64,3 @@ class ScreencapsManager:
 
 
 screencaps_manager = ScreencapsManager(pool_size=500)
-

@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import jsonify, send_from_directory
 
 from micro_web.app import app
 from micro_web.utils import route_wrap_01_version, gen_default_success_response
@@ -34,3 +34,13 @@ def stop_screencaps():
     """
     screencaps_manager.stop_screen_shot()
     return gen_default_success_response()
+
+
+@app.route(route_wrap_01_version('screencaps/static/<path:path>'))
+def screencaps_resource(path):
+    """
+    返回截图资源地址
+    :param path:
+    :return:
+    """
+    return send_from_directory('resources/screencaps', path)

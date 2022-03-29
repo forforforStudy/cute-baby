@@ -1,7 +1,7 @@
 from flask import jsonify
 
 from micro_web.app import app
-from micro_web.utils import route_wrap_01_version
+from micro_web.utils import route_wrap_01_version, gen_default_success_response
 from resources.screencaps_manager import screencaps_manager
 
 
@@ -23,6 +23,7 @@ def start_screencaps():
     :return:
     """
     screencaps_manager.start_screen_shot()
+    return gen_default_success_response()
 
 
 @app.route(route_wrap_01_version('screencaps/stop'), methods=['POST'])
@@ -32,3 +33,4 @@ def stop_screencaps():
     :return:
     """
     screencaps_manager.stop_screen_shot()
+    return gen_default_success_response()

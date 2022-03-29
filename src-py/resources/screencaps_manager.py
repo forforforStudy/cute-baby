@@ -2,7 +2,8 @@ import os
 import pathlib
 
 from colorama import init, Fore
-from resources.screencap_thread import stop_screencap, start_screencap_thread
+
+from resources.screencap_thread import start_screencap_thread, stop_screencap_threads
 
 init()
 
@@ -60,7 +61,7 @@ class ScreencapsManager:
         print(Fore.YELLOW + '停止定时截屏执行')
 
         self.is_screencap_doing = False
-        stop_screencap()
+        stop_screencap_threads()
 
 
 screencaps_manager = ScreencapsManager(pool_size=500)

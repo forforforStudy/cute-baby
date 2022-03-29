@@ -20,5 +20,7 @@ def start_screencap_thread():
             adb_ins.screencap_once()
             time.sleep(2)
 
+    global stop_screencap
+    stop_screencap = False
     current_thread = threading.Thread(target=running_target)
     current_thread.start()

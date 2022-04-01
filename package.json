@@ -49,6 +49,7 @@
   "devDependencies": {
     "@tauri-apps/cli": "^1.0.0-rc.5",
     "@types/react-router-dom": "^5.3.3",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "postcss-preset-env": "^7.4.3"
   }
 }

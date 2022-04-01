@@ -6,7 +6,7 @@ import Screencaps from '../screencaps'
 export default function Home() {
   return (
     <BrowserRouter>
-      <ul>
+      <ul className="flex flex-row">
         <li>
           <Link to="/">App</Link>
         </li>

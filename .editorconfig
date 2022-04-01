@@ -1,0 +1,10 @@
+# indicate this is the root of the project
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+
+[*.{js,jsx,ts,tsx}]
+indent_size = 2
+quote_type = single

@@ -3,6 +3,8 @@
   windows_subsystem = "windows"
 )]
 
+mod flask_web;
+
 fn main() {
   tauri::Builder::default()
     .run(tauri::generate_context!())

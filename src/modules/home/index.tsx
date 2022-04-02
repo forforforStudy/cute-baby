@@ -7,10 +7,10 @@ export default function Home() {
   return (
     <BrowserRouter>
       <ul className="flex flex-row">
-        <li>
+        <li className="mr-1">
           <Link to="/">App</Link>
         </li>
-        <li>
+        <li className="mr-1">
           <Link to="/screencaps">Screencaps</Link>
         </li>
       </ul>

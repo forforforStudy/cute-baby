@@ -1,20 +1,29 @@
 use reqwest;
+use serde::{Serialize, Deserialize};
 
 const SCREENCAPS_HOST: &str = "http://localhost:5555";
 
-#[tauri::command]
-pub fn screencaps_client_box() -> String {
+#[derive(Serialize, Deserialize)]
+pub struct ScreencapsList {
+    items: Vec<String>,
+    total: u32,
+}
 
+#[tauri::command]
+pub fn screencaps_client_box() -> ScreencapsList {
     let result = reqwest::blocking::get(format!("{}/v0.1/screencaps", SCREENCAPS_HOST))
         .unwrap()
-        .text();
+        .json::<ScreencapsList>();
 
     match result {
         Ok(screencaps) => {
             screencaps
         }
-        Err(reason) => {
-            "reason".to_string()
+        Err(_reason) => {
+            ScreencapsList {
+                items: vec![],
+                total: 0,
+            }
         }
     }
 }

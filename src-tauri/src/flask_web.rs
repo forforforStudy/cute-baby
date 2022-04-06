@@ -1,1 +1,1 @@
-mod screencaps_client;
+pub mod screencaps_client;

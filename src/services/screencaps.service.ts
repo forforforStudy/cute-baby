@@ -9,6 +9,6 @@ interface ScreencapsList {
  * 获取到截屏列表
  */
 export function getScreencapsList(): Promise<ScreencapsList> {
-  return invoke('screencaps_client_box')
+  return invoke('get_screencaps_list')
 }
 

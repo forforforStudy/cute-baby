@@ -10,7 +10,7 @@ pub struct ScreencapsList {
 }
 
 #[tauri::command]
-pub fn screencaps_client_box() -> ScreencapsList {
+pub fn get_screencaps_list() -> ScreencapsList {
     let result = reqwest::blocking::get(format!("{}/v0.1/screencaps", SCREENCAPS_HOST))
         .unwrap()
         .json::<ScreencapsList>();

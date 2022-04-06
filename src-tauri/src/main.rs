@@ -5,11 +5,11 @@
 
 pub mod flask_web;
 
-use flask_web::screencaps_client::screencaps_client_box;
+use flask_web::screencaps_client::get_screencaps_list;
 
 fn main() {
   tauri::Builder::default()
-    .invoke_handler(tauri::generate_handler![screencaps_client_box])
+    .invoke_handler(tauri::generate_handler![get_screencaps_list])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }

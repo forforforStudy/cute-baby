@@ -1,4 +1,5 @@
 use reqwest;
+use reqwest::blocking::RequestBuilder;
 use serde::{Serialize, Deserialize};
 
 const SCREENCAPS_HOST: &str = "http://localhost:5555";
@@ -24,6 +25,38 @@ pub fn get_screencaps_list() -> ScreencapsList {
                 items: vec![],
                 total: 0,
             }
+        }
+    }
+}
+
+#[tauri::command]
+pub fn control_screencaps_running(start: bool) -> u8 {
+    let client = reqwest::blocking::Client::new();
+    let request_url = match start {
+        true => format!("{}/v0.1/screencaps/start", SCREENCAPS_HOST),
+        false => format!("{}/v0.1/screencaps/stop", SCREENCAPS_HOST)
+    };
+
+    match client.post(request_url).send() {
+        Ok(result) => {
+            1
+        }
+        Err(_) => {
+            0
+        }
+    }
+}
+
+#[tauri::command]
+pub fn clean_all_screencaps() -> u8 {
+    let client = reqwest::blocking::Client::new();
+
+    match client.post("{}/v0.1/screencaps/clean").send() {
+        Ok(_result) => {
+            1
+        }
+        Err(_) => {
+            0
         }
     }
 }

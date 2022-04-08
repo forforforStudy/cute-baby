@@ -12,3 +12,10 @@ export function getScreencapsList(): Promise<ScreencapsList> {
   return invoke('get_screencaps_list')
 }
 
+/**
+ * 控制截图行为
+ * @param start
+ */
+export function controlScreencapsRunning(start: boolean) {
+  return invoke('control_screencaps_running', { start })
+}

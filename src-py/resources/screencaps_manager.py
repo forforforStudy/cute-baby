@@ -1,5 +1,6 @@
 import os
 import pathlib
+import PIL
 
 from colorama import init, Fore
 
@@ -62,6 +63,20 @@ class ScreencapsManager:
 
         self.is_screencap_doing = False
         stop_screencap_threads()
+
+    def clean_all(self):
+        """
+        清空截屏文件夹下的所有截图文件
+        :return:
+        """
+        print(Fore.RED + '清空截屏文件夹下的所有截图文件')
+        self.stop_screen_shot()
+
+        current_pool_size = self.pool_size
+
+        self.pool_size = 0
+        self.remove_of_oversize()
+        self.pool_size = current_pool_size
 
 
 screencaps_manager = ScreencapsManager(pool_size=500)

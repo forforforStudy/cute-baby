@@ -1,8 +1,6 @@
 from typing import List, Tuple
 
-import adb.bootstrap
-
-from adb.bootstrap import ADBDevice, device
+from adb.bootstrap import ADBDevice, device, Bin
 from adb.command.list_package import list_package
 from adb.command.screencap import screencap, ScreencapResult
 from adb.command.launch_app import launch_app
@@ -18,7 +16,7 @@ class ADB:
         准备好ADB的工作
         :return:
         """
-        result = bootstrap.Bin.bootstrap_adb()
+        result = Bin.bootstrap_adb()
 
         if result and len(result) > 0:
             print('adb had bootstrap and devices has connected')

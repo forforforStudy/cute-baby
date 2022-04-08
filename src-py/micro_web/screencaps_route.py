@@ -36,6 +36,16 @@ def stop_screencaps():
     return gen_default_success_response()
 
 
+@app.route(route_wrap_01_version('screencaps/clean'), methods=['POST'])
+def clean_all():
+    """
+    清空截图
+    :return:
+    """
+    screencaps_manager.clean_all()
+    return gen_default_success_response()
+
+
 @app.route(route_wrap_01_version('screencaps/static/<path:path>'))
 def screencaps_resource(path):
     """

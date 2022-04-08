@@ -1,11 +1,14 @@
 import React, { useCallback, useEffect } from 'react'
 import { map } from 'lodash'
 import { screencapsStore } from './store'
-import { getScreencapsList, controlScreencapsRunning } from '../../services/screencaps.service'
+import { getScreencapsList, controlScreencapsRunning, cleanAllScreencaps } from '../../services/screencaps.service'
 
 function Screencaps() {
   const { screencaps, total, startScreencaps, updateScreencaps, updateTotal, updateStartScreencaps } = screencapsStore()
 
+  /**
+   * 处理开始截屏指令
+   */
   const handleStartScreencapsClick = () => {
     const nextStartScreencaps = !startScreencaps
 
@@ -14,6 +17,9 @@ function Screencaps() {
     })
   }
 
+  /**
+   * 处理刷新逻辑
+   */
   const handleReloadScreencaps = useCallback(
     () => {
       getScreencapsList().then((screencapsList) => {
@@ -23,6 +29,15 @@ function Screencaps() {
     },
     [ updateScreencaps, updateTotal ],
   )
+
+  /**
+   * 处理清空所有截屏文件逻辑
+    */
+  const handleCleanAllScreencaps = useCallback(() => {
+    cleanAllScreencaps().then(() => {
+      handleReloadScreencaps()
+    })
+  }, [handleReloadScreencaps])
 
   useEffect(() => {
     handleReloadScreencaps()
@@ -38,6 +53,9 @@ function Screencaps() {
         </button>
         <button className="border border-red-500" onClick={handleReloadScreencaps}>
           刷新
+        </button>
+        <button className="border border-red-800" onClick={handleCleanAllScreencaps}>
+          清空截屏
         </button>
       </section>
       <section>

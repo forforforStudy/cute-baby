@@ -51,7 +51,7 @@ pub fn control_screencaps_running(start: bool) -> u8 {
 pub fn clean_all_screencaps() -> u8 {
     let client = reqwest::blocking::Client::new();
 
-    match client.post("{}/v0.1/screencaps/clean").send() {
+    match client.post(format!("{}/v0.1/screencaps/clean", SCREENCAPS_HOST)).send() {
         Ok(_result) => {
             1
         }

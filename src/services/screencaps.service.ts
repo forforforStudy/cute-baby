@@ -19,3 +19,10 @@ export function getScreencapsList(): Promise<ScreencapsList> {
 export function controlScreencapsRunning(start: boolean) {
   return invoke('control_screencaps_running', { start })
 }
+
+/**
+ * 清空截屏文件夹
+ */
+export function cleanAllScreencaps() {
+  return invoke('clean_all_screencaps')
+}
